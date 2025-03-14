@@ -84,9 +84,6 @@ from app import app as application
 ```
 4. Save and reload the web app.
 
-### **Step 4: Access the Live App**
-- **User Page:** [`https://SHREYAPAT728.pythonanywhere.com`](https://SHREYAPAT728.pythonanywhere.com)
-- **Admin Panel:** [`https://SHREYAPAT728.pythonanywhere.com/admin`](https://SHREYAPAT728.pythonanywhere.com/admin)
 
 ## 🔗 Links
 - **Live Demo:** [`https://SHREYAPAT728.pythonanywhere.com`](https://SHREYAPAT728.pythonanywhere.com)
