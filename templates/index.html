@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}Claim Your Coupon{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h2>Get Your Exclusive Discount Coupon</h2>
+    <p>Claim a unique coupon code to use on your next purchase!</p>
+    
+    <div class="coupon-container">
+        <div id="coupon-result" class="hidden">
+            <div class="coupon-card">
+                <div class="coupon-content">
+                    <h3>Your Coupon Code</h3>
+                    <div class="coupon-code" id="coupon-code"></div>
+                    <p class="coupon-instruction">Use this code at checkout to receive your discount</p>
+                    <button id="copy-coupon" class="btn">Copy Code</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="claim-container">
+            <button id="claim-coupon" class="btn btn-primary">Claim Your Coupon</button>
+            <p class="note">One coupon per user every 24 hours</p>
+        </div>
+        
+        <div id="error-message" class="error-message hidden"></div>
+    </div>
+</section>
+
+<section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>Claim a Coupon</h3>
+            <p>Click the button above to get your unique coupon code</p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>Copy Your Code</h3>
+            <p>Save your coupon code for your purchase</p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>Use at Checkout</h3>
+            <p>Enter the code during checkout to receive your discount</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

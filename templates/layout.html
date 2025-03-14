@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Coupon System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Coupon Distribution System</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    {% if session.get('admin_logged_in') %}
+                    <li><a href="{{ url_for('admin_panel') }}">Admin Panel</a></li>
+                    <li><a href="{{ url_for('admin_logout') }}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Coupon Distribution System</p>
+        </div>
+    </footer>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-panel">
+    <h2>Admin Panel</h2>
+    
+    <div class="admin-section">
+        <h3>Add New Coupon</h3>
+        <form method="post" action="{{ url_for('add_coupon') }}" class="add-coupon-form">
+            <div class="form-group">
+                <label for="code">Coupon Code</label>
+                <input type="text" id="code" name="code" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Coupon</button>
+        </form>
+    </div>
+    
+    <div class="admin-section">
+        <h3>Manage Coupons</h3>
+        <div class="coupon-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Code</th>
+                        <th>Status</th>
+                        <th>Claimed By</th>
+                        <th>Claimed At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for coupon in coupons %}
+                    <tr>
+                        <td>{{ coupon['id'] }}</td>
+                        <td>{{ coupon['code'] }}</td>
+                        <td>
+                            <span class="status-badge {{ 'active' if coupon['is_active'] else 'inactive' }}">
+                                {{ 'Active' if coupon['is_active'] else 'Inactive' }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if coupon['claimed_by_ip'] %}
+                                IP: {{ coupon['claimed_by_ip'] }}<br>
+                                Session: {{ coupon['claimed_by_session'][:8] }}...
+                            {% else %}
+                                Not claimed
+                            {% endif %}
+                        </td>
+                        <td>{{ coupon['claimed_at'] or 'N/A' }}</td>
+                        <td>
+                            <form method="post" action="{{ url_for('toggle_coupon', id=coupon['id']) }}">
+                                <button type="submit" class="btn btn-small {{ 'btn-danger' if coupon['is_active'] else 'btn-success' }}">
+                                    {{ 'Deactivate' if coupon['is_active'] else 'Activate' }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
