@@ -1,0 +1,17 @@
+-- Create the coupons table
+CREATE TABLE coupons (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    is_used BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the admins table
+CREATE TABLE admins (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(80) UNIQUE NOT NULL,
+    password VARCHAR(120) NOT NULL
+);
+
+-- Insert a default admin user
+INSERT INTO admins (username, password) VALUES ('Shreya', 'shreya123');
